@@ -103,7 +103,7 @@ function Person(name) {
 	var obj = {};
 	obj.name = name;
 	obj.getName = function() {
-		return this.name;
+		return obj.name;
 	}
 
 	return obj;
@@ -113,7 +113,7 @@ function Man(name, facialHair) {
 	var objChild = Person(name);
 	objChild.facialHair = facialHair;
 	objChild.getFacialHair = function() {
-		return this.facialHair;
+		return objChild.facialHair;
 	}
 	objChild.getName = function() {
 		return "Name: " + objChild.name;
@@ -122,7 +122,8 @@ function Man(name, facialHair) {
 }
 
 var somebody = Person("Bob");
-console.log(somebody);
+var somebody2 = Person("Bobbbb");
+console.log(somebody,somebody2);
 console.log(somebody.getName());
 var man = Man("Ivan", true);
 console.log(man.getName());
