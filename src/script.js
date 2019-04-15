@@ -100,29 +100,32 @@
 //============================Реализовать функциональное наследование=========================
 
 function Person(name) {
-	this.name = name;
-
-	this.getName = function() {
+	var obj = {};
+	obj.name = name;
+	obj.getName = function() {
 		return this.name;
 	}
+
+	return obj;
 }
 
 function Man(name, facialHair) {
-	Person.apply(this, arguments);
-
-	this.facialHair = facialHair;
-	var name = this.getName.call(this);
-	this.getName = function() {
-		return "Name: " + name;
-	}
-	this.getFacialHair = function() {
+	var objChild = Person(name);
+	objChild.facialHair = facialHair;
+	objChild.getFacialHair = function() {
 		return this.facialHair;
 	}
+	objChild.getName = function() {
+		return "Name: " + objChild.name;
+	}
+	return objChild;
 }
 
-var somebody = new Person("Max");
+var somebody = Person("Bob");
+console.log(somebody);
 console.log(somebody.getName());
-var man = new Man("Ivan", true);
+var man = Man("Ivan", true);
 console.log(man.getName());
 console.log(man.getFacialHair());
+
 
