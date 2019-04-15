@@ -65,33 +65,64 @@
 // console.log(man.getName()); // Name: Viktor
 // console.log(man.getFacialHair()); // true
 
+// function Person(name) {
+// 	this.name = name;
+// }
+
+// Person.prototype.getName = function() {
+// 	return this.name;
+// }
+
+// function Man(name, facialHair) {
+// 	Person.call(this, name);
+// 	this.facialHair = facialHair;
+// }
+
+// Man.prototype = Object.create(Person.prototype);
+// Man.prototype.constructor = Man;
+
+// Man.prototype.getName = function() {
+// 	return "Name: " + Person.prototype.getName.apply(this, arguments);
+// }
+// Man.prototype.getFacialHair = function() {
+// 	return this.facialHair;
+// }
+
+// var some = new Person("Vasya");
+
+// var man = new Man("Ivan", true);
+// console.log(some.getName());
+// console.log(man.getFacialHair());
+// console.log(man);
+// console.log(man.getName());
+
+
+//============================Реализовать функциональное наследование=========================
+
 function Person(name) {
 	this.name = name;
-}
 
-Person.prototype.getName = function() {
-	return this.name;
+	this.getName = function() {
+		return this.name;
+	}
 }
 
 function Man(name, facialHair) {
-	Person.call(this, name);
+	Person.apply(this, arguments);
+
 	this.facialHair = facialHair;
+	var name = this.getName.call(this);
+	this.getName = function() {
+		return "Name: " + name;
+	}
+	this.getFacialHair = function() {
+		return this.facialHair;
+	}
 }
 
-Man.prototype = Object.create(Person.prototype);
-Man.prototype.constructor = Man;
-
-Man.prototype.getName = function() {
-	return "Name: " + Person.prototype.getName.apply(this, arguments);
-}
-Man.prototype.getFacialHair = function() {
-	return this.facialHair;
-}
-
-var some = new Person("Vasya");
-
+var somebody = new Person("Max");
+console.log(somebody.getName());
 var man = new Man("Ivan", true);
-console.log(some.getName());
-console.log(man.getFacialHair());
-console.log(man);
 console.log(man.getName());
+console.log(man.getFacialHair());
+
