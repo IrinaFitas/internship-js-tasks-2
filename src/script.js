@@ -1,4 +1,4 @@
-//==========Singleton. Задача на замыкания и понимания фунции-конструктора===================
+// ==========Singleton. Задача на замыкания и понимания фунции-конструктора===================
 // var Universe = (function(){
 // 	var instance;
 
@@ -30,7 +30,7 @@
 // console.log(a.getSize(), b.getSize()); 
 
 
-//===Переписать наследование с ES6 на ES5===============================================
+// ===Переписать наследование с ES6 на ES5===============================================
 
 // class Person {
 //   constructor (name) {
@@ -97,36 +97,65 @@
 // console.log(man.getName());
 
 
-//============================Реализовать функциональное наследование=========================
+// ============================Реализовать функциональное наследование=========================
 
-function Person(name) {
-	var obj = {};
-	obj.name = name;
-	obj.getName = function() {
-		return obj.name;
-	}
+// function Person(name) {
+// 	var obj = {};
+// 	obj.name = name;
+// 	obj.getName = function() {
+// 		return obj.name;
+// 	}
 
-	return obj;
+// 	return obj;
+// }
+
+// function Man(name, facialHair) {
+// 	var objChild = Person(name);
+// 	objChild.facialHair = facialHair;
+// 	objChild.getFacialHair = function() {
+// 		return objChild.facialHair;
+// 	}
+// 	objChild.getName = function() {
+// 		return "Name: " + objChild.name;
+// 	}
+// 	return objChild;
+// }
+
+// var somebody = Person("Bob");
+// var somebody2 = Person("Bobbbb");
+// console.log(somebody,somebody2);
+// console.log(somebody.getName());
+// var man = Man("Ivan", true);
+// console.log(man.getName());
+// console.log(man.getFacialHair());
+
+
+//========================================Промисы (практика промисов и асинхронности)===========
+
+function delay(ms) {
+	return new Promise(function(resolve, reject) {
+		var value = 100;
+		setTimeout(resolve(value), ms);
+	});
 }
 
-function Man(name, facialHair) {
-	var objChild = Person(name);
-	objChild.facialHair = facialHair;
-	objChild.getFacialHair = function() {
-		return objChild.facialHair;
-	}
-	objChild.getName = function() {
-		return "Name: " + objChild.name;
-	}
-	return objChild;
+//delay(1000).then(value => console.log("Done with value: " + value));
+
+function getDataUsers() {
+	fetch("http://www.json-generator.com/api/json/get/cfQCylRjuG")
+	.then( res => res.json())
+	.then ( data => {
+		if(data.getUsersData) {
+			fetch("http://www.json-generator.com/api/json/get/cfVGucaXPC")
+				.then( res => res.json())
+				.then( data => console.log(data))
+		}
+	});	
 }
 
-var somebody = Person("Bob");
-var somebody2 = Person("Bobbbb");
-console.log(somebody,somebody2);
-console.log(somebody.getName());
-var man = Man("Ivan", true);
-console.log(man.getName());
-console.log(man.getFacialHair());
+//getDataUsers();
+
+
+
 
 
