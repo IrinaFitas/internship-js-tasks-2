@@ -182,6 +182,21 @@ function serialLoadPromises() {
 
 //serialLoadPromises();
 
+function getResolvedPromise(value) {
+	return Promise.resolve(value);
+}
+
+getResolvedPromise(500).then( res => {
+	if (res > 300) {
+		try {
+			throw "Error!";
+		} catch(err) {
+			console.log(err);
+		} finally {
+			console.log("This is finally!")
+		}
+	}
+});
 
 
 
