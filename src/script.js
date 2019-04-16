@@ -142,9 +142,7 @@ function delay(ms) {
 //delay(1000).then(value => console.log("Done with value: " + value));
 
 function getDataUsers() {
-	fetch("http://www.json-generator.com/api/json/get/cfQCylRjuG")
-	.then( res => res.json())
-	.then ( data => {
+	fetch("http://www.json-generator.com/api/json/get/cfQCylRjuG").then( res => res.json()).then ( data => {
 		if (data.getUsersData) { 
 			fetch("http://www.json-generator.com/api/json/get/cfVGucaXPC").then( res => res.text()).then ( data => console.log(data)).catch ( error => console.log(error))
 		}
