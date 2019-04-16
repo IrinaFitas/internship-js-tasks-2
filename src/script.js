@@ -157,24 +157,37 @@ let promisesArr = ["http://www.json-generator.com/api/json/get/ceQMMKpidK", "htt
 
 function parallelLoadPromises() {
 	var arr = promisesArr.map( item => fetch(item));
-	Promise.all(arr).then ( res => res.map( item => item.json())).then ( data => data.forEach(item => item.then(res => console.log(res))))
+	Promise.all(arr).then ( res => res.map( item => item.json())).then( data => data.forEach(item => item.then(res => console.log(res))))
 }
 
-parallelLoadPromises();
+//parallelLoadPromises();
 
 function serialLoadPromises() {
-	let result = [];
-	promisesArr.forEach( item => 
-		fetch(item)
-		.then( resolve => resolve.json())
-		.then( data => result.push(data))
-		.catch( error => console.log(error))
-	);
+	// let result = [];
+	// promisesArr.forEach( item => 
+	// 	fetch(item)
+	// 	.then( resolve => resolve.json())
+	// 	.then( data => result.push(data))
+	// 	.catch( error => console.log(error))
+	// );
 
-	console.log(result);
+	// console.log(result);
+
+	promisesArr.reduce( (previousValue, nextValue) => {
+		fetch(previousValue).then(res => res.json()).then(data => console.log(data))
+			.then(fetch(nextValue)
+				.then(res => res.json())
+				.then( data => console.log(data)))
+	});
+	
+
+	// console.log(str);
+	// fetch(str)
+	// 	.then( res => res.json() )
+	// 	.then (data => console.log(data))
 }
 
-//serialLoadPromises();
+serialLoadPromises();
 
 function getResolvedPromise(value) {
 	return Promise.resolve(value);
