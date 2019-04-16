@@ -162,53 +162,29 @@ function parallelLoadPromises() {
 
 //parallelLoadPromises();
 
-function serialLoadPromises() {
-	// let result = [];
-	// promisesArr.forEach( item => 
-	// 	fetch(item)
-	// 	.then( resolve => resolve.json())
-	// 	.then( data => result.push(data))
-	// 	.catch( error => console.log(error))
-	// );
-
-	// console.log(result);
-
-	promisesArr.reduce( (previousValue, nextValue) => {
-		fetch(previousValue).then(res => res.json()).then(data => console.log(data))
-			.then(fetch(nextValue)
-				.then(res => res.json())
-				.then( data => console.log(data)))
-	});
-	
-
-	// console.log(str);
-	// fetch(str)
-	// 	.then( res => res.json() )
-	// 	.then (data => console.log(data))
+function fetchUrl(url) {
+    return fetch(url).then(function (response) { return response.json(); });
 }
+function getDataSeq(urlArray) {
+    var finalData = [];
+    var fetchSequentally = function () { return urlArray.reduce(function (promise, url) { return promise.then(function () { return fetchUrl(url).then(function (response) { return finalData.push(response); }); }); }, Promise.resolve()); };
+    return fetchSequentally().then(function () { return finalData; });
+}
+//getDataSeq(promisesArr).then(function (data) { return console.log(data); });
 
-serialLoadPromises();
 
 function getResolvedPromise(value) {
 	return Promise.resolve(value);
 }
 
-// getResolvedPromise(500).then( res => {
-// 	if (res > 300) {
-// 		try {
-// 			throw "Error!";
-// 		} catch(err) {
-// 			console.log(err);
-// 		} finally {
-// 			console.log("This is finally!")
-// 		}
-// 	}
-// });
+getResolvedPromise(500).then( res => {
+	if (res > 300) {
+		throw "Error";
+	}
+}).catch( err => console.log(err)).finally( () => console.log("This is finally!"));
 
 
 //=======Наделение функционалом======
-
-
 
 
 
