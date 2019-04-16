@@ -151,19 +151,16 @@ function getDataUsers() {
 	});	
 }
 
-getDataUsers();
+//getDataUsers();
 
 let promisesArr = ["http://www.json-generator.com/api/json/get/ceQMMKpidK", "http://www.json-generator.com/api/json/get/cfkrfOjrfS", "http://www.json-generator.com/api/json/get/cfDZdmxnDm", "http://www.json-generator.com/api/json/get/cguaPsRxAi", "http://www.json-generator.com/api/json/get/cevhxOsZnS"];
 
 function parallelLoadPromises() {
-	Promise.all(promisesArr.forEach( item => 
-	fetch(item)
-	.then( resolve => resolve.json())
-	.then ( data => console.log(data))
-	.catch( error => console.log(error))));
+	var arr = promisesArr.map( item => fetch(item));
+	Promise.all(arr).then ( res => res.map( item => item.json())).then ( data => data.forEach(item => item.then(res => console.log(res))))
 }
 
-//parallelLoadPromises();
+parallelLoadPromises();
 
 function serialLoadPromises() {
 	let result = [];
