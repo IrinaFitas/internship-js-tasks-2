@@ -142,11 +142,7 @@ function delay(ms) {
 //delay(1000).then(value => console.log("Done with value: " + value));
 
 function getDataUsers() {
-	fetch("http://www.json-generator.com/api/json/get/cfQCylRjuG").then( res => res.json()).then ( data => {
-		if (data.getUsersData) { 
-			fetch("http://www.json-generator.com/api/json/get/cfVGucaXPC").then( res => res.text()).then ( data => console.log(data)).catch ( error => console.log(error))
-		}
-	});	
+	fetch("http://www.json-generator.com/api/json/get/cfQCylRjuG").then( res => res.json()).then ( data => { if (data.getUsersData) { fetch("http://www.json-generator.com/api/json/get/cfVGucaXPC").then( res => res.text()).then ( data => console.log(data)).catch ( error => console.log(error))}});	
 }
 
 //getDataUsers();
@@ -175,11 +171,7 @@ function getResolvedPromise(value) {
 	return Promise.resolve(value);
 }
 
-getResolvedPromise(500).then( res => {
-	if (res > 300) {
-		throw "Error";
-	}
-}).catch( err => console.log(err)).finally( () => console.log("This is finally!"));
+getResolvedPromise(500).then( res => { if (res > 300) { throw "Error"; }}).catch( err => console.log(err)).finally( () => console.log("This is finally!"));
 
 
 //=======Наделение функционалом======
