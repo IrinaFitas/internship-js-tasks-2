@@ -190,19 +190,9 @@
 //=======Наделение функционалом======
 
 Array.prototype.dublicate = function() {
-	var newArr = [];
-
-	for (var i = 0; i < this.length; i++) {
-		if (Array.isArray(this[i])) {
-			this[i].dublicate();
-		}
-
-		newArr.push(this[i]);
-	}
-
-	return newArr.concat(this);
+	return [...this, ...this];
 }
 
-var arr = [1, 2, 3];
+var arr = [1, 2, 3, [4, 5]];
 console.log(arr.dublicate());
 
