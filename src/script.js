@@ -145,16 +145,13 @@ function getDataUsers() {
 	fetch("http://www.json-generator.com/api/json/get/cfQCylRjuG")
 	.then( res => res.json())
 	.then ( data => {
-		if(data.getUsersData) {
-			fetch("http://www.json-generator.com/api/json/get/cfVGucaXPC")
-				.then( res => res.json())
-				.then( data => console.log(data))
-				.catch ( error => console.log(error))
+		if (data.getUsersData) { 
+			fetch("http://www.json-generator.com/api/json/get/cfVGucaXPC").then( res => res.text()).then ( data => console.log(data)).catch ( error => console.log(error))
 		}
 	});	
 }
 
-//getDataUsers();
+getDataUsers();
 
 let promisesArr = ["http://www.json-generator.com/api/json/get/ceQMMKpidK", "http://www.json-generator.com/api/json/get/cfkrfOjrfS", "http://www.json-generator.com/api/json/get/cfDZdmxnDm", "http://www.json-generator.com/api/json/get/cguaPsRxAi", "http://www.json-generator.com/api/json/get/cevhxOsZnS"];
 
@@ -186,17 +183,21 @@ function getResolvedPromise(value) {
 	return Promise.resolve(value);
 }
 
-getResolvedPromise(500).then( res => {
-	if (res > 300) {
-		try {
-			throw "Error!";
-		} catch(err) {
-			console.log(err);
-		} finally {
-			console.log("This is finally!")
-		}
-	}
-});
+// getResolvedPromise(500).then( res => {
+// 	if (res > 300) {
+// 		try {
+// 			throw "Error!";
+// 		} catch(err) {
+// 			console.log(err);
+// 		} finally {
+// 			console.log("This is finally!")
+// 		}
+// 	}
+// });
+
+
+//=======Наделение функционалом======
+
 
 
 
