@@ -149,11 +149,39 @@ function getDataUsers() {
 			fetch("http://www.json-generator.com/api/json/get/cfVGucaXPC")
 				.then( res => res.json())
 				.then( data => console.log(data))
+				.catch ( error => console.log(error))
 		}
 	});	
 }
 
 //getDataUsers();
+
+let promisesArr = ["http://www.json-generator.com/api/json/get/ceQMMKpidK", "http://www.json-generator.com/api/json/get/cfkrfOjrfS", "http://www.json-generator.com/api/json/get/cfDZdmxnDm", "http://www.json-generator.com/api/json/get/cguaPsRxAi", "http://www.json-generator.com/api/json/get/cevhxOsZnS"];
+
+function parallelLoadPromises() {
+	Promise.all(promisesArr.forEach( item => 
+	fetch(item)
+	.then( resolve => resolve.json())
+	.then ( data => console.log(data))
+	.catch( error => console.log(error))));
+}
+
+//parallelLoadPromises();
+
+function serialLoadPromises() {
+	let result = [];
+	promisesArr.forEach( item => 
+		fetch(item)
+		.then( resolve => resolve.json())
+		.then( data => result.push(data))
+		.catch( error => console.log(error))
+	);
+
+	console.log(result);
+}
+
+//serialLoadPromises();
+
 
 
 
