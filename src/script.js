@@ -132,63 +132,77 @@
 
 //========================================Промисы (практика промисов и асинхронности)===========
 
-function delay(ms) {
-	return new Promise(function(resolve, reject) {
-		var value = 100;
-		setTimeout(resolve(value), ms);
-	});
-}
+// function delay(ms) {
+// 	return new Promise(function(resolve, reject) {
+// 		var value = 100;
+// 		setTimeout(resolve(value), ms);
+// 	});
+// }
 
-//delay(1000).then(value => console.log("Done with value: " + value));
+// //delay(1000).then(value => console.log("Done with value: " + value));
 
-function getDataUsers() {
-	fetch("http://www.json-generator.com/api/json/get/cfQCylRjuG")
-		.then( res => res.json())
-		.then ( data => { 
-	            if (data.getUsersData) { 
-		       	return fetch("http://www.json-generator.com/api/json/get/cfVGucaXPC");
-		     	}
-                     throw Error('something wrong');
-		})
-            .then( res => res.text())
-		.then ( data => console.log(data))
-		.catch ( error => console.log(error))	
-}
+// function getDataUsers() {
+// 	fetch("http://www.json-generator.com/api/json/get/cfQCylRjuG")
+// 		.then( res => res.json())
+// 		.then ( data => { 
+// 	            if (data.getUsersData) { 
+// 		       	return fetch("http://www.json-generator.com/api/json/get/cfVGucaXPC");
+// 		     	}
+//                      throw Error('something wrong');
+// 		})
+//             .then( res => res.text())
+// 		.then ( data => console.log(data))
+// 		.catch ( error => console.log(error))	
+// }
 
-getDataUsers();
+// getDataUsers();
 
-let promisesArr = ["http://www.json-generator.com/api/json/get/ceQMMKpidK", "http://www.json-generator.com/api/json/get/cfkrfOjrfS", "http://www.json-generator.com/api/json/get/cfDZdmxnDm", "http://www.json-generator.com/api/json/get/cguaPsRxAi", "http://www.json-generator.com/api/json/get/cevhxOsZnS"];
+// let promisesArr = ["http://www.json-generator.com/api/json/get/ceQMMKpidK", "http://www.json-generator.com/api/json/get/cfkrfOjrfS", "http://www.json-generator.com/api/json/get/cfDZdmxnDm", "http://www.json-generator.com/api/json/get/cguaPsRxAi", "http://www.json-generator.com/api/json/get/cevhxOsZnS"];
 
-function parallelLoadPromises() {
-	var arr = promisesArr.map( item => fetch(item));
-	Promise.all(arr).then ( res => res.map( item => item.json())).then( data => data.forEach(item => item.then(res => console.log(res))))
-}
+// function parallelLoadPromises() {
+// 	var arr = promisesArr.map( item => fetch(item));
+// 	Promise.all(arr).then ( res => res.map( item => item.json())).then( data => data.forEach(item => item.then(res => console.log(res))))
+// }
 
-//parallelLoadPromises();
+// //parallelLoadPromises();
 
-function fetchUrl(url) {
-    return fetch(url).then(function (response) { return response.json(); });
-}
-function getDataSeq(urlArray) {
-    var finalData = [];
-    var fetchSequentally = function () { return urlArray.reduce(function (promise, url) { return promise.then(function () { return fetchUrl(url).then(function (response) { return finalData.push(response); }); }); }, Promise.resolve()); };
-    return fetchSequentally().then(function () { return finalData; });
-}
-//getDataSeq(promisesArr).then(function (data) { return console.log(data); });
+// function fetchUrl(url) {
+//     return fetch(url).then(function (response) { return response.json(); });
+// }
+// function getDataSeq(urlArray) {
+//     var finalData = [];
+//     var fetchSequentally = function () { return urlArray.reduce(function (promise, url) { return promise.then(function () { return fetchUrl(url).then(function (response) { return finalData.push(response); }); }); }, Promise.resolve()); };
+//     return fetchSequentally().then(function () { return finalData; });
+// }
+// //getDataSeq(promisesArr).then(function (data) { return console.log(data); });
 
 
-function getResolvedPromise(value) {
-	return Promise.resolve(value);
-}
+// function getResolvedPromise(value) {
+// 	return Promise.resolve(value);
+// }
 
-getResolvedPromise(500)
-	.then( res => { if (res > 300) { throw "Error"; }})
-	.catch( err => console.log(err))
-	.finally( () => console.log("This is finally!"));
+// getResolvedPromise(500)
+// 	.then( res => { if (res > 300) { throw "Error"; }})
+// 	.catch( err => console.log(err))
+// 	.finally( () => console.log("This is finally!"));
 
 
 //=======Наделение функционалом======
 
+Array.prototype.dublicate = function() {
+	var newArr = [];
 
+	for (var i = 0; i < this.length; i++) {
+		if (Array.isArray(this[i])) {
+			this[i].dublicate();
+		}
 
+		newArr.push(this[i]);
+	}
+
+	return newArr.concat(this);
+}
+
+var arr = [1, 2, 3];
+console.log(arr.dublicate());
 
