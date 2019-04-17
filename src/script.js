@@ -296,10 +296,15 @@
 
 function union(arr1, arr2) {
 	let set = new Set([...arr1, ...arr2]);
-	let newArr = [];
-	set.forEach( (value) => newArr.push(value));
+	return [...set];
+}
+
+//console.log(union([4,5,7,2,1,5],[1,2,3,7,9]));
+
+function intersection(arr1, arr2) {
+	let newArr = arr1.filter( elem => arr2.includes(elem));
 	return newArr;
 }
 
-console.log(union([4,5,7,2,1,5],[1,2,3,7,9]));
+//console.log(intersection([1,2,3], [4,3,2])); 
 
