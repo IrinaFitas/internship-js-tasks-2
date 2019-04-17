@@ -314,6 +314,32 @@ function diff(arr1, arr2) {
 	return [...set];
 }
 
-console.log(diff([1,2,3,7,9],[4,5,7,2,1,5]));
-console.log(diff([4,5,7,2,1,5], [1,2,3,7,9]));
+// console.log(diff([1,2,3,7,9],[4,5,7,2,1,5]));
+// console.log(diff([4,5,7,2,1,5], [1,2,3,7,9]));
+
+//=====Функция, принимающую строку  и возвращающая объект======================
+
+function makeObjectFromString(str) {
+	let array = str.split(".");
+	
+
+	// for (let i = 0; i < array.length; i++) {
+	// 	Object.defineProperty(obj, array[i], {
+	// 		value: Object.create(Object.prototype)
+	// 	});
+	// }
+
+	return array.reduceRight( (accumulator, item, index, arr) => {
+      	let obj = {};
+      	if (index === arr.length-1) {
+      		obj[item] = Object.create(null);
+      	} else {
+      		obj[item] = Object.assign({}, accumulator);
+      	}
+      	
+      	return obj;
+    	}, {});
+}
+
+console.log(makeObjectFromString("a.b.c.d"));
 
