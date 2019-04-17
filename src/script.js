@@ -227,14 +227,14 @@ Function.prototype.myBindByCall = function(obj, ...arg) {
 	}
 }
 
-console.log(obj1.foo.myApply(obj2, [5, 5])); 
-console.log(obj1.foo.myApply(obj2, [5, 5, 10])); 
-console.log(obj1.foo.myCall(obj2, 5, 5, 20));
-console.log(obj1.foo.myCall(obj2, 5, 5, 10, 20)); 
-const f1 = obj1.foo.myBindByCall(obj2, 5, 5);
-console.log(f1());
-const f2 = obj1.foo.myBindByCall(obj2, 5, 5, 10);
-console.log(f2());
+// console.log(obj1.foo.myApply(obj2, [5, 5])); 
+// console.log(obj1.foo.myApply(obj2, [5, 5, 10])); 
+// console.log(obj1.foo.myCall(obj2, 5, 5, 20));
+// console.log(obj1.foo.myCall(obj2, 5, 5, 10, 20)); 
+// const f1 = obj1.foo.myBindByCall(obj2, 5, 5);
+// console.log(f1());
+// const f2 = obj1.foo.myBindByCall(obj2, 5, 5, 10);
+// console.log(f2());
 
 //====Object.create========
 const obj3 = {
@@ -257,12 +257,14 @@ function objectCreate(parent, properties) {
 	let obj = new EmptyObj();
 	
 	for (let prop in properties) {
-		Object.defineProperty(obj, prop, {
+		if (properties.hasOwnProperty((prop))) {
+			Object.defineProperty(obj, prop, {
 			value: properties[prop].value,
 			writable: true,
 			configurable: true,
 			enumerable: true,
-		});
+			});
+		}
 	}
 	return obj;
 }
@@ -271,10 +273,9 @@ console.log(obj4);
 
 //======Своя реализация New========
 function myNew(func) {
-	//func.prototype.constructor = func;
-	var obj = {};
+	var obj = Object.create(func.prototype);
+	func.prototype.constructor = func;
 	func.apply(obj, arguments);
-	obj._proto_ = func.prototype;
 	return obj;
 }
 
