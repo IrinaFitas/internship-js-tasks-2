@@ -372,7 +372,26 @@ const input = [
    'стрелка'
 ];
 
-console.log(findAnnagram(input));
+//console.log(findAnnagram(input));
 
 
 //========Функция sum, которая работает с многим количеством последовательных вызовов====
+function sum(a) {
+
+  var value = a;
+
+  function f(b) {
+    value += b;
+    return f;
+  }
+
+  f.toString = function() {
+    return value;
+  };
+
+  return f;
+}
+
+console.log(sum(1)(2)(3)()); // 6
+console.log(sum(1)(2)(3)(4) + 1); // 11
+console.log(sum(1)(2)(3)(4)(5) + 1); // 16
