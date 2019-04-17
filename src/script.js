@@ -189,10 +189,33 @@
 
 //=======Наделение функционалом======
 
-Array.prototype.dublicate = function() {
-	return [...this, ...this];
+// Array.prototype.dublicate = function() {
+// 	return [...this, ...this];
+// }
+
+// var arr = [1, 2, 3, [4, 5]];
+// console.log(arr.dublicate());
+
+//=============Полифилы======================
+
+//===call, apply, bind======================
+
+const obj1 = {
+  a: 20,
+  foo: function(...numbers) {
+      return this.a + numbers.reduce((prev, curr) => prev + curr);
+  }
+};
+
+const obj2 = {
+  a: 30
+};
+
+Function.prototype.myApply = function(obj, arr) {
+	return this.call(obj, ...arr);
 }
 
-var arr = [1, 2, 3, [4, 5]];
-console.log(arr.dublicate());
 
+
+console.log(obj1.foo.myApply(obj2, [5, 5])); 
+console.log(obj1.foo.myApply(obj2, [5, 5, 10])); 
