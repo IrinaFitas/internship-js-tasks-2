@@ -219,8 +219,19 @@ Function.prototype.myCall = function(obj, ...arg) {
 	return this.apply(obj, arg);
 }
 
+Function.prototype.myBindByCall = function(obj, ...arg) {
+	var self = this;
+
+	return function() {
+		return self.call(obj, ...arg);
+	}
+}
 
 console.log(obj1.foo.myApply(obj2, [5, 5])); 
 console.log(obj1.foo.myApply(obj2, [5, 5, 10])); 
 console.log(obj1.foo.myCall(obj2, 5, 5, 20));
 console.log(obj1.foo.myCall(obj2, 5, 5, 10, 20)); 
+const f1 = obj1.foo.myBindByCall(obj2, 5, 5);
+console.log(f1());
+const f2 = obj1.foo.myBindByCall(obj2, 5, 5, 10);
+console.log(f2());
