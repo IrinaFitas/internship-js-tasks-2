@@ -308,3 +308,12 @@ function intersection(arr1, arr2) {
 
 //console.log(intersection([1,2,3], [4,3,2])); 
 
+function diff(arr1, arr2) {
+	let newArr = arr1.filter( elem => !arr2.includes(elem));
+	let set = new Set([...newArr]);
+	return [...set];
+}
+
+console.log(diff([1,2,3,7,9],[4,5,7,2,1,5]));
+console.log(diff([4,5,7,2,1,5], [1,2,3,7,9]));
+
