@@ -200,93 +200,106 @@
 
 //===call, apply, bind======================
 
-const obj1 = {
-  a: 20,
-  foo: function(...numbers) {
-      return this.a + numbers.reduce((prev, curr) => prev + curr);
-  }
-};
+// const obj1 = {
+//   a: 20,
+//   foo: function(...numbers) {
+//       return this.a + numbers.reduce((prev, curr) => prev + curr);
+//   }
+// };
 
-const obj2 = {
-  a: 30
-};
+// const obj2 = {
+//   a: 30
+// };
 
-Function.prototype.myApply = function(obj, arr) {
-	return this.call(obj, ...arr);
-}
+// Function.prototype.myApply = function(obj, arr) {
+// 	return this.call(obj, ...arr);
+// }
 
-Function.prototype.myCall = function(obj, ...arg) {
-	return this.apply(obj, arg);
-}
+// Function.prototype.myCall = function(obj, ...arg) {
+// 	return this.apply(obj, arg);
+// }
 
-Function.prototype.myBindByCall = function(obj, ...arg) {
-	var self = this;
+// Function.prototype.myBindByCall = function(obj, ...arg) {
+// 	var self = this;
 
-	return function() {
-		return self.call(obj, ...arg);
-	}
-}
+// 	return function() {
+// 		return self.call(obj, ...arg);
+// 	}
+// }
 
-// console.log(obj1.foo.myApply(obj2, [5, 5])); 
-// console.log(obj1.foo.myApply(obj2, [5, 5, 10])); 
-// console.log(obj1.foo.myCall(obj2, 5, 5, 20));
-// console.log(obj1.foo.myCall(obj2, 5, 5, 10, 20)); 
-// const f1 = obj1.foo.myBindByCall(obj2, 5, 5);
-// console.log(f1());
-// const f2 = obj1.foo.myBindByCall(obj2, 5, 5, 10);
-// console.log(f2());
+// // console.log(obj1.foo.myApply(obj2, [5, 5])); 
+// // console.log(obj1.foo.myApply(obj2, [5, 5, 10])); 
+// // console.log(obj1.foo.myCall(obj2, 5, 5, 20));
+// // console.log(obj1.foo.myCall(obj2, 5, 5, 10, 20)); 
+// // const f1 = obj1.foo.myBindByCall(obj2, 5, 5);
+// // console.log(f1());
+// // const f2 = obj1.foo.myBindByCall(obj2, 5, 5, 10);
+// // console.log(f2());
 
-//====Object.create========
-const obj3 = {
-    a: 1
-};
+// //====Object.create========
+// const obj3 = {
+//     a: 1
+// };
 
-const obj4 = objectCreate(obj3, {
-    p: {
-        value: 20
-    },
-    k: {
-        value: 30
-    }
-});
+// const obj4 = objectCreate(obj3, {
+//     p: {
+//         value: 20
+//     },
+//     k: {
+//         value: 30
+//     }
+// });
 
 
-function objectCreate(parent, properties) {
-	function EmptyObj() {}
-	EmptyObj.prototype = parent;
-	let obj = new EmptyObj();
+// function objectCreate(parent, properties) {
+// 	function EmptyObj() {}
+// 	EmptyObj.prototype = parent;
+// 	let obj = new EmptyObj();
 	
-	for (let prop in properties) {
-		if (properties.hasOwnProperty((prop))) {
-			Object.defineProperty(obj, prop, {
-			value: properties[prop].value,
-			writable: true,
-			configurable: true,
-			enumerable: true,
-			});
-		}
-	}
-	return obj;
+// 	for (let prop in properties) {
+// 		if (properties.hasOwnProperty((prop))) {
+// 			Object.defineProperty(obj, prop, {
+// 			value: properties[prop].value,
+// 			writable: true,
+// 			configurable: true,
+// 			enumerable: true,
+// 			});
+// 		}
+// 	}
+// 	return obj;
+// }
+
+// console.log(obj4);
+
+// //======Своя реализация New========
+// function myNew(func) {
+// 	var obj = Object.create(func.prototype);
+// 	func.prototype.constructor = func;
+// 	func.apply(obj, arguments);
+// 	return obj;
+// }
+
+// function F() {
+//     this.a = 10;
+// }
+
+// F.prototype.foo = function () {
+//     return this.a;
+// }
+
+// const a = myNew(F);
+// console.log(a); 
+// console.log(a.foo()); 
+
+
+//========Реализовать функции объединения, пересечения, разности элементов двух массивов=====
+
+function union(arr1, arr2) {
+	let set = new Set([...arr1, ...arr2]);
+	let newArr = [];
+	set.forEach( (value) => newArr.push(value));
+	return newArr;
 }
 
-console.log(obj4);
+console.log(union([4,5,7,2,1,5],[1,2,3,7,9]));
 
-//======Своя реализация New========
-function myNew(func) {
-	var obj = Object.create(func.prototype);
-	func.prototype.constructor = func;
-	func.apply(obj, arguments);
-	return obj;
-}
-
-function F() {
-    this.a = 10;
-}
-
-F.prototype.foo = function () {
-    return this.a;
-}
-
-const a = myNew(F);
-console.log(a); 
-console.log(a.foo()); 
