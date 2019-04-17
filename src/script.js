@@ -341,5 +341,38 @@ function makeObjectFromString(str) {
     	}, {});
 }
 
-console.log(makeObjectFromString("a.b.c.d"));
+//console.log(makeObjectFromString("a.b.c.d"));
 
+//=======Аннаграммы============================================================
+function findAnnagram(arr) {
+	let obj = {};
+	let newArr = [];
+
+	let sortedArr = arr.map( elem => {
+		obj[elem] = elem.toLowerCase().split("").sort().join("");
+	});
+	
+	for (let prop in obj) {
+		newArr.push([prop]);
+	}
+	
+	return newArr;
+}
+
+
+const input = [
+   'вертикаль',
+   'кильватер',
+   'апельсин',
+   'спаниель',
+   'австралопитек',
+   'ватерполистка',
+   'кластер',
+   'сталкер',
+   'стрелка'
+];
+
+console.log(findAnnagram(input));
+
+
+//========Функция sum, которая работает с многим количеством последовательных вызовов====
