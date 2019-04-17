@@ -332,7 +332,7 @@ function makeObjectFromString(str) {
 	return array.reduceRight( (accumulator, item, index, arr) => {
       	let obj = {};
       	if (index === arr.length-1) {
-      		obj[item] = Object.create(null);
+      		obj[item] = null;
       	} else {
       		obj[item] = Object.assign({}, accumulator);
       	}
@@ -348,13 +348,23 @@ function findAnnagram(arr) {
 	let obj = {};
 	let newArr = [];
 
-	let sortedArr = arr.map( elem => {
+	arr.forEach( elem => {
 		obj[elem] = elem.toLowerCase().split("").sort().join("");
 	});
 	
-	for (let prop in obj) {
-		newArr.push([prop]);
-	}
+	let set = new Set([...Object.values(obj)]);
+	
+	[...set].forEach(item => {
+		let temp = [];
+
+		for (let key in obj) {
+			if (obj[key] === item) {
+				temp.push(key);
+			}
+		}
+
+		newArr.push(temp);
+	});
 	
 	return newArr;
 }
@@ -378,20 +388,20 @@ const input = [
 //========Функция sum, которая работает с многим количеством последовательных вызовов====
 function sum(a) {
 
-  var value = a;
+	var value = a;
 
-  function f(b) {
-    value += b;
-    return f;
-  }
+	function f(b) {
+		value += b;
+		return f;
+	}
 
-  f.toString = function() {
-    return value;
-  };
+	f.toString = function() {
+		return value;
+	};
 
-  return f;
+	return f;
 }
 
-console.log(sum(1)(2)(3)()); // 6
-console.log(sum(1)(2)(3)(4) + 1); // 11
-console.log(sum(1)(2)(3)(4)(5) + 1); // 16
+console.log(sum(1)(2)(3)()); 
+console.log(sum(1)(2)(3)(4) + 1); 
+console.log(sum(1)(2)(3)(4)(5) + 1);
