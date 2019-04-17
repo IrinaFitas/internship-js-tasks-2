@@ -215,7 +215,12 @@ Function.prototype.myApply = function(obj, arr) {
 	return this.call(obj, ...arr);
 }
 
+Function.prototype.myCall = function(obj, ...arg) {
+	return this.apply(obj, arg);
+}
 
 
 console.log(obj1.foo.myApply(obj2, [5, 5])); 
 console.log(obj1.foo.myApply(obj2, [5, 5, 10])); 
+console.log(obj1.foo.myCall(obj2, 5, 5, 20));
+console.log(obj1.foo.myCall(obj2, 5, 5, 10, 20)); 
