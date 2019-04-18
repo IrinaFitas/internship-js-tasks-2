@@ -331,17 +331,16 @@ function makeObjectFromString(str) {
 
 	return array.reduceRight( (accumulator, item, index, arr) => {
       	let obj = {};
+      	obj[item] = Object.assign({}, accumulator);
+      	
       	if (index === arr.length-1) {
       		obj[item] = null;
-      	} else {
-      		obj[item] = Object.assign({}, accumulator);
       	}
-      	
       	return obj;
     	}, {});
 }
 
-//console.log(makeObjectFromString("a.b.c.d"));
+console.log(makeObjectFromString("a.b.c.d"));
 
 //=======Аннаграммы============================================================
 function findAnnagram(arr) {
