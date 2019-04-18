@@ -187,7 +187,7 @@
 // 	.finally( () => console.log("This is finally!"));
 
 
-//=======Наделение функционалом======
+// =======Наделение функционалом======
 
 // Array.prototype.dublicate = function() {
 // 	return [...this, ...this];
@@ -196,9 +196,9 @@
 // var arr = [1, 2, 3, [4, 5]];
 // console.log(arr.dublicate());
 
-//=============Полифилы======================
+// =============Полифилы======================
 
-//===call, apply, bind======================
+// ===call, apply, bind======================
 
 // const obj1 = {
 //   a: 20,
@@ -303,10 +303,11 @@ function union(arr1, arr2) {
 
 function intersection(arr1, arr2) {
 	let newArr = arr1.filter( elem => arr2.includes(elem));
-	return newArr;
+	let set = new Set([...newArr]);
+	return [...set];
 }
 
-//console.log(intersection([1,2,3], [4,3,2])); 
+console.log(intersection([1,2,3], [4,3,2])); 
 
 function diff(arr1, arr2) {
 	let newArr = arr1.filter( elem => !arr2.includes(elem));
