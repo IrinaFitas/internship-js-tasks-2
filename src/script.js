@@ -302,12 +302,11 @@ function union(arr1, arr2) {
 //console.log(union([4,5,7,2,1,5],[1,2,3,7,9]));
 
 function intersection(arr1, arr2) {
-	let newArr = arr1.filter( elem => arr2.includes(elem));
-	let set = new Set([...newArr]);
-	return [...set];
+	let set = new Set([...arr1].filter(elem => arr2.includes(elem)));
+	return [...set]; 
 }
 
-console.log(intersection([1,2,3], [4,3,2])); 
+//console.log(intersection([1,2,3], [4,3,2])); 
 
 function diff(arr1, arr2) {
 	let newArr = arr1.filter( elem => !arr2.includes(elem));
@@ -352,10 +351,9 @@ function findAnnagram(arr) {
 	arr.forEach( elem => {
 		obj[elem] = elem.toLowerCase().split("").sort().join("");
 	});
+
 	
-	let set = new Set([...Object.values(obj)]);
-	
-	[...set].forEach(item => {
+	new Set([...Object.values(obj)]).forEach(item => {
 		let temp = [];
 
 		for (let key in obj) {
@@ -383,7 +381,7 @@ const input = [
    'стрелка'
 ];
 
-//console.log(findAnnagram(input));
+console.log(findAnnagram(input));
 
 
 //========Функция sum, которая работает с многим количеством последовательных вызовов====
@@ -403,6 +401,6 @@ function sum(a) {
 	return f;
 }
 
-console.log(sum(1)(2)(3)()); 
-console.log(sum(1)(2)(3)(4) + 1); 
-console.log(sum(1)(2)(3)(4)(5) + 1);
+// console.log(sum(1)(2)(3)()); 
+// console.log(sum(1)(2)(3)(4) + 1); 
+// console.log(sum(1)(2)(3)(4)(5) + 1);
