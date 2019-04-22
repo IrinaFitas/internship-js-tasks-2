@@ -294,112 +294,154 @@
 
 //========Реализовать функции объединения, пересечения, разности элементов двух массивов=====
 
-function union(arr1, arr2) {
-	let set = new Set([...arr1, ...arr2]);
-	return [...set];
-}
+// function union(arr1, arr2) {
+// 	let set = new Set([...arr1, ...arr2]);
+// 	return [...set];
+// }
 
-//console.log(union([4,5,7,2,1,5],[1,2,3,7,9]));
+// //console.log(union([4,5,7,2,1,5],[1,2,3,7,9]));
 
-function intersection(arr1, arr2) {
-	let set = new Set([...arr1].filter(elem => arr2.includes(elem)));
-	return [...set]; 
-}
+// // function intersection(arr1, arr2) {
+// // 	let set = new Set([...arr1].filter(elem => arr2.includes(elem)));
+// // 	return [...set]; 
+// // }
+// const intersection = (first, second) => [... new Set(first)].filter(el => new Set(second).has(el));
+// //console.log(intersection([1,2,3], [4,3,2])); 
 
-//console.log(intersection([1,2,3], [4,3,2])); 
+// function diff(arr1, arr2) {
+// 	let newArr = arr1.filter( elem => !arr2.includes(elem));
+// 	let set = new Set([...newArr]);
+// 	return [...set];
+// }
 
-function diff(arr1, arr2) {
-	let newArr = arr1.filter( elem => !arr2.includes(elem));
-	let set = new Set([...newArr]);
-	return [...set];
-}
+// // console.log(diff([1,2,3,7,9],[4,5,7,2,1,5]));
+// // console.log(diff([4,5,7,2,1,5], [1,2,3,7,9]));
 
-// console.log(diff([1,2,3,7,9],[4,5,7,2,1,5]));
-// console.log(diff([4,5,7,2,1,5], [1,2,3,7,9]));
+// //=====Функция, принимающую строку  и возвращающая объект======================
 
-//=====Функция, принимающую строку  и возвращающая объект======================
-
-function makeObjectFromString(str) {
-	let array = str.split(".");
+// function makeObjectFromString(str) {
+// 	let array = str.split(".");
 	
 
-	// for (let i = 0; i < array.length; i++) {
-	// 	Object.defineProperty(obj, array[i], {
-	// 		value: Object.create(Object.prototype)
-	// 	});
-	// }
+// 	// for (let i = 0; i < array.length; i++) {
+// 	// 	Object.defineProperty(obj, array[i], {
+// 	// 		value: Object.create(Object.prototype)
+// 	// 	});
+// 	// }
 
-	return array.reduceRight( (accumulator, item, index, arr) => {
-      	let obj = {};
-      	obj[item] = Object.assign({}, accumulator);
+// 	return array.reduceRight( (accumulator, item, index, arr) => {
+//       	let obj = {};
+//       	obj[item] = Object.assign({}, accumulator);
       	
-      	if (index === arr.length-1) {
-      		obj[item] = null;
-      	}
-      	return obj;
-    	}, {});
-}
+//       	if (index === arr.length-1) {
+//       		obj[item] = null;
+//       	}
+//       	return obj;
+//     	}, {});
+// }
 
-console.log(makeObjectFromString("a.b.c.d"));
+// //console.log(makeObjectFromString("a.b.c.d"));
 
-//=======Аннаграммы============================================================
-function findAnnagram(arr) {
-	let obj = {};
-	let newArr = [];
+// //=======Аннаграммы============================================================
+// function findAnnagram(arr) {
+// 	let obj = {};
+// 	let newArr = [];
 
-	arr.forEach( elem => {
-		obj[elem] = elem.toLowerCase().split("").sort().join("");
-	});
+// 	arr.forEach( elem => {
+// 		obj[elem] = elem.toLowerCase().split("").sort().join("");
+// 	});
 
+// 	[... new Set(Object.values(obj))].filter(el => {
+// 		let temp = [];
+		
+// 		for (let key in obj) {
+// 			if (obj[key] === el) {
+// 				temp.push(key);
+// 			}
+// 		}
+
+// 		newArr.push(temp);
+// 	});	
 	
-	new Set([...Object.values(obj)]).forEach(item => {
-		let temp = [];
+// 	// new Set([...Object.values(obj)]).forEach(item => {
+// 	// 	let temp = [];
 
-		for (let key in obj) {
-			if (obj[key] === item) {
-				temp.push(key);
-			}
-		}
+// 	// 	for (let key in obj) {
+// 	// 		if (obj[key] === item) {
+// 	// 			temp.push(key);
+// 	// 		}
+// 	// 	}
 
-		newArr.push(temp);
-	});
+// 	// 	newArr.push(temp);
+// 	// });
 	
-	return newArr;
-}
+// 	return newArr;
+// }
 
 
-const input = [
-   'вертикаль',
-   'кильватер',
-   'апельсин',
-   'спаниель',
-   'австралопитек',
-   'ватерполистка',
-   'кластер',
-   'сталкер',
-   'стрелка'
-];
+// const input = [
+//    'вертикаль',
+//    'кильватер',
+//    'апельсин',
+//    'спаниель',
+//    'австралопитек',
+//    'ватерполистка',
+//    'кластер',
+//    'сталкер',
+//    'стрелка'
+// ];
 
-console.log(findAnnagram(input));
+// console.log(findAnnagram(input));
 
 
-//========Функция sum, которая работает с многим количеством последовательных вызовов====
-function sum(a) {
+// //========Функция sum, которая работает с многим количеством последовательных вызовов====
+// function sum(a) {
 
-	var value = a;
+// 	var value = a;
 
-	function f(b) {
-		value += b;
-		return f;
-	}
+// 	function f(b) {
+// 		value += b;
+// 		return f;
+// 	}
 
-	f.toString = function() {
-		return value;
-	};
+// 	f.toString = function() {
+// 		return value;
+// 	};
 
-	return f;
-}
+// 	return f;
+// }
 
 // console.log(sum(1)(2)(3)()); 
 // console.log(sum(1)(2)(3)(4) + 1); 
 // console.log(sum(1)(2)(3)(4)(5) + 1);
+
+
+
+//====Функции compose, add, mul. add и mul - каррированные функции (только на 2 вызова). 
+
+// function add(a) {
+// 	return function(b) {
+// 		return a + b;
+// 	}
+// }
+
+// function mul(a) {
+// 	return function(b) {
+// 		return a * b;
+// 	}
+// }
+const add = a => b => a + b;
+const mul = a => b => a * b;
+
+function compose(func, ...anotherFunc) {
+	return function(x) {
+		return func(anotherFunc.reduce( (value, elem) => elem(value), x) );
+	}
+}
+
+const composed = compose(mul(2), add(5), add(2));
+console.log(composed(3)); 
+console.log([1, 2, 6].map(composed)); 
+// 3+2=5
+// 5+5=10
+// 2*10=20
