@@ -439,9 +439,26 @@ function compose(func, ...anotherFunc) {
 	}
 }
 
-const composed = compose(mul(2), add(5), add(2));
-console.log(composed(3)); 
-console.log([1, 2, 6].map(composed)); 
-// 3+2=5
-// 5+5=10
-// 2*10=20
+// const composed = compose(mul(2), add(5), add(2));
+// console.log(composed(3)); 
+// console.log([1, 2, 6].map(composed)); 
+
+
+//=====Функция prop, в которую передается ключ для получение значение по этому ключу
+
+const tweeps = [
+  { name: 'Peter', age: 20 },
+  { name: 'Mary', age: 32 }
+];
+
+function prop(key) {
+	return function(item) {
+		return item[key];
+	}
+}
+
+const str = 'Mentioned by ' + tweeps.map(prop('name')).join(', ');
+// console.log(str);
+const agesStr = `They are ${tweeps.map(prop('age')).join(',')}`;
+// console.log(agesStr);
+
