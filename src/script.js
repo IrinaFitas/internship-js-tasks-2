@@ -485,14 +485,17 @@ function reduce(arr, callbackFunc, initialValue) {
 
 	if (initialValue) {
 		accumulator = initialValue;
+
+		for (let i=0; i<arr.length; i++) {
+			accumulator = callbackFunc(accumulator, arr[i], i, arr);
+		}
 	} else {
 		accumulator = arr[0];
+		for (let i=1; i<arr.length; i++) {
+			accumulator = callbackFunc(accumulator, arr[i], i, arr);
+		}
 	}
 
-	for (let i=0; i<arr.length; i++) {
-		accumulator = callbackFunc(accumulator, arr[i], i, arr);
-	}
-	  
 	return accumulator;
 }
 
