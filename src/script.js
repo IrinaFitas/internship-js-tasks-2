@@ -478,3 +478,28 @@ x = '' || 0 && true // 0 - у && приоритет выше, поэтому с�
 x = {} || 0 && true // {} - выполнится сначала && и вернёт 0, но оператор || вернёт первое истинное {}
 x = false || {} && true // true - выполнится сначала && и вернёт true(последнее истинное), а оператор || вернёт первое истинное true
 
+//========.reduce()=====================================
+
+function reduce(arr, callbackFunc, initialValue) {
+	let accumulator;
+
+	if (initialValue) {
+		accumulator = initialValue;
+	} else {
+		accumulator = 0;
+	}
+
+	for (let i=0; i<arr.length; i++) {
+		accumulator = callbackFunc(accumulator, arr[i], i, arr);
+	}
+	  
+	return accumulator;
+}
+
+let arr = [10, 20, 30, 40];
+const sum = (a, b) => a + b;
+let result1 = reduce(arr, sum);
+console.log(result1); 
+let result2 = reduce(arr, sum, 10);
+console.log(result2);
+
