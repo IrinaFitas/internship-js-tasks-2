@@ -483,17 +483,18 @@ x = false || {} && true // true - выполнится сначала && и ве
 function reduce(arr, callbackFunc, initialValue) {
 	let accumulator;
 
+	function cycle(start) {
+		for (let i=start; i<arr.length; i++) {
+			accumulator = callbackFunc(accumulator, arr[i], i, arr);
+		}
+	}
+
 	if (initialValue) {
 		accumulator = initialValue;
-
-		for (let i=0; i<arr.length; i++) {
-			accumulator = callbackFunc(accumulator, arr[i], i, arr);
-		}
+		cycle(0);
 	} else {
 		accumulator = arr[0];
-		for (let i=1; i<arr.length; i++) {
-			accumulator = callbackFunc(accumulator, arr[i], i, arr);
-		}
+		cycle(1);
 	}
 
 	return accumulator;
