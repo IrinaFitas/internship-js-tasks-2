@@ -486,7 +486,7 @@ function reduce(arr, callbackFunc, initialValue) {
 	if (initialValue) {
 		accumulator = initialValue;
 	} else {
-		accumulator = 0;
+		accumulator = arr[0];
 	}
 
 	for (let i=0; i<arr.length; i++) {
