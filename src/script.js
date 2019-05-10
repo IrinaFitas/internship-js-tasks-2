@@ -553,23 +553,50 @@
 // console.log(reverseNum(876));
 
 
-function showNestingStr(str) {
-	let left = [];
-	let right = [];	
+//============NestingStr Function==============
+// function showNestingStr(str) {
+// 	let left = [];
+// 	let right = [];	
 
-	if (str.length % 2 !== 0) {
+// 	if (str.length % 2 !== 0) {
+// 		return false;
+// 	}
+// 	for (let i = 0; i < str.length/2; i++) {
+// 		left[i] = "{";
+// 		right[i] = "}";
+// 	}
+	
+// 	return (str === [...left, ...right].join("")) ? true : false;
+// }
+
+// console.log(showNestingStr("{{}}}}}}}}"));
+// console.log(showNestingStr('{}')); 
+// console.log(showNestingStr('{{}}'));
+// console.log(showNestingStr('{{}}}'));
+//console.log(showNestingStr('{}{}{}{{}}'));
+
+function showNestingStr(str) {
+	let left = 0;
+	let right = 0;
+
+	for (let i = 0; i < str.length; i++) {  
+
+		if (str[i] === "{") {
+		    left++;
+		} else if (str[i] === "}") {
+		    right++;
+		}  
+	} 
+
+	if (left === right) {
+		return true;
+	} else {
 		return false;
 	}
-	for (let i = 0; i < str.length/2; i++) {
-		left[i] = "{";
-		right[i] = "}";
-	}
-	
-	return (str === [...left, ...right].join("")) ? true : false;
 }
 
 console.log(showNestingStr("{{}}}}}}}}"));
 console.log(showNestingStr('{}')); 
 console.log(showNestingStr('{{}}'));
 console.log(showNestingStr('{{}}}'));
-console.log(showNestingStr('{{{{}}'));
+console.log(showNestingStr('{}{}{}{{}}'));
