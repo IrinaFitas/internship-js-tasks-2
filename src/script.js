@@ -523,4 +523,10 @@ function reverseNumber(num) {
     
 }
 
-console.log(reverseNumber(15));
+console.log(reverseNumber(1508));
+
+function reverse(num) {
+   return '\u202E' + num;
+}
+
+console.log(reverse(4512));
