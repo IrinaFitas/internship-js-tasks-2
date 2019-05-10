@@ -130,7 +130,7 @@
 // console.log(man.getFacialHair());
 
 
-//========================================Промисы (практика промисов и асинхронности)===========
+// ========================================Промисы (практика промисов и асинхронности)===========
 
 // function delay(ms) {
 // 	return new Promise(function(resolve, reject) {
@@ -292,7 +292,7 @@
 // console.log(a.foo()); 
 
 
-//========Реализовать функции объединения, пересечения, разности элементов двух массивов=====
+// ========Реализовать функции объединения, пересечения, разности элементов двух массивов=====
 
 // function union(arr1, arr2) {
 // 	let set = new Set([...arr1, ...arr2]);
@@ -417,7 +417,7 @@
 
 
 
-//====Функции compose, add, mul. add и mul - каррированные функции (только на 2 вызова). 
+// ====Функции compose, add, mul. add и mul - каррированные функции (только на 2 вызова). 
 
 // function add(a) {
 // 	return function(b) {
@@ -430,80 +430,97 @@
 // 		return a * b;
 // 	}
 // }
-const add = a => b => a + b;
-const mul = a => b => a * b;
+// const add = a => b => a + b;
+// const mul = a => b => a * b;
 
-function compose(func, ...anotherFunc) {
-	return function(x) {
-		return func(anotherFunc.reduce( (value, elem) => elem(value), x) );
-	}
-}
+// function compose(func, ...anotherFunc) {
+// 	return function(x) {
+// 		return func(anotherFunc.reduce( (value, elem) => elem(value), x) );
+// 	}
+// }
 
-// const composed = compose(mul(2), add(5), add(2));
-// console.log(composed(3)); 
-// console.log([1, 2, 6].map(composed)); 
+// // const composed = compose(mul(2), add(5), add(2));
+// // console.log(composed(3)); 
+// // console.log([1, 2, 6].map(composed)); 
 
 
-//=====Функция prop, в которую передается ключ для получение значение по этому ключу================
+// //=====Функция prop, в которую передается ключ для получение значение по этому ключу================
 
-const tweeps = [
-  { name: 'Peter', age: 20 },
-  { name: 'Mary', age: 32 }
-];
+// const tweeps = [
+//   { name: 'Peter', age: 20 },
+//   { name: 'Mary', age: 32 }
+// ];
 
-function prop(key) {
-	return function(item) {
-		return item[key];
-	}
-}
+// function prop(key) {
+// 	return function(item) {
+// 		return item[key];
+// 	}
+// }
 
-const str = 'Mentioned by ' + tweeps.map(prop('name')).join(', ');
-// console.log(str);
-const agesStr = `They are ${tweeps.map(prop('age')).join(',')}`;
-// console.log(agesStr);
+// const str = 'Mentioned by ' + tweeps.map(prop('name')).join(', ');
+// // console.log(str);
+// const agesStr = `They are ${tweeps.map(prop('age')).join(',')}`;
+// // console.log(agesStr);
 
-//========Заполнить таблицу, и понимать как работает || и &&==========
+// //========Заполнить таблицу, и понимать как работает || и &&==========
 
-let x = false && '' //здесь будет false, так && возвратит первое ложное значение
-x = false || '' // возвратит "", так как оба ложны, возвратит последнее ложное
-x = '' || 'Yes' // "Yes", так как || возвратит первое истинное значение
-x = {} && 'Some' // "Some", так как {} = true и строка true, а && вернет последнее истинное значение
-x = {} || 'Some' // {} - так как || вернет первое истинное значение
-x = {a: 10} && 'Some' // "Some", так как {} = true и строка true, а && вернет последнее истинное значение
-x = {a: 10} || 'Some' // {a: 10} - так как || вернет первое истинное значение
-x = 0 || true // true, так как || возвращает первое истинное утверждение
-x = null || 0 // 0 потому, что если все значения ложны || возвращает последнее ложное
-x = undefined && 0 // undefined потому, что && возвращает первое ложное
-x = '' || 0 && true // 0 - у && приоритет выше, поэтому сначала он вернёт 0, а оператор || в этом случае вернёт последнее ложное 0
-x = {} || 0 && true // {} - выполнится сначала && и вернёт 0, но оператор || вернёт первое истинное {}
-x = false || {} && true // true - выполнится сначала && и вернёт true(последнее истинное), а оператор || вернёт первое истинное true
+// let x = false && '' //здесь будет false, так && возвратит первое ложное значение
+// x = false || '' // возвратит "", так как оба ложны, возвратит последнее ложное
+// x = '' || 'Yes' // "Yes", так как || возвратит первое истинное значение
+// x = {} && 'Some' // "Some", так как {} = true и строка true, а && вернет последнее истинное значение
+// x = {} || 'Some' // {} - так как || вернет первое истинное значение
+// x = {a: 10} && 'Some' // "Some", так как {} = true и строка true, а && вернет последнее истинное значение
+// x = {a: 10} || 'Some' // {a: 10} - так как || вернет первое истинное значение
+// x = 0 || true // true, так как || возвращает первое истинное утверждение
+// x = null || 0 // 0 потому, что если все значения ложны || возвращает последнее ложное
+// x = undefined && 0 // undefined потому, что && возвращает первое ложное
+// x = '' || 0 && true // 0 - у && приоритет выше, поэтому сначала он вернёт 0, а оператор || в этом случае вернёт последнее ложное 0
+// x = {} || 0 && true // {} - выполнится сначала && и вернёт 0, но оператор || вернёт первое истинное {}
+// x = false || {} && true // true - выполнится сначала && и вернёт true(последнее истинное), а оператор || вернёт первое истинное true
 
-//========.reduce()=====================================
+// //========.reduce()=====================================
 
-function reduce(arr, callbackFunc, initialValue) {
-	let accumulator;
+// function reduce(arr, callbackFunc, initialValue) {
+// 	let accumulator;
 
-	function cycle(start) {
-		for (let i=start; i<arr.length; i++) {
-			accumulator = callbackFunc(accumulator, arr[i], i, arr);
-		}
-	}
+// 	function cycle(start) {
+// 		for (let i=start; i<arr.length; i++) {
+// 			accumulator = callbackFunc(accumulator, arr[i], i, arr);
+// 		}
+// 	}
 
-	if (initialValue) {
-		accumulator = initialValue;
-		cycle(0);
+// 	if (initialValue) {
+// 		accumulator = initialValue;
+// 		cycle(0);
+// 	} else {
+// 		accumulator = arr[0];
+// 		cycle(1);
+// 	}
+
+// 	return accumulator;
+// }
+
+// let arr = [10, 20, 30, 40];
+// const sum = (a, b) => a + b;
+// let result1 = reduce(arr, sum);
+// console.log(result1); 
+// let result2 = reduce(arr, sum, 10);
+// console.log(result2);
+
+
+//=====Reverse Number========================
+
+function reverseNumber(num) {
+	var str = num.toString();
+	var result;
+	if (str === "") {
+		return "";
 	} else {
-		accumulator = arr[0];
-		cycle(1);
+		result = reverseNumber(str.substr(1)) + str.charAt(0);
 	}
 
-	return accumulator;
+	return Number(result);
+    
 }
 
-let arr = [10, 20, 30, 40];
-const sum = (a, b) => a + b;
-let result1 = reduce(arr, sum);
-console.log(result1); 
-let result2 = reduce(arr, sum, 10);
-console.log(result2);
-
+console.log(reverseNumber(15));
