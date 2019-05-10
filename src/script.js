@@ -340,7 +340,7 @@
 //     	}, {});
 // }
 
-// //console.log(makeObjectFromString("a.b.c.d"));
+// console.log(makeObjectFromString("a.b.c.d"));
 
 // //=======Аннаграммы============================================================
 // function findAnnagram(arr) {
@@ -510,23 +510,66 @@
 
 //=====Reverse Number========================
 
-function reverseNumber(num) {
-	var str = num.toString();
-	var result;
-	if (str === "") {
-		return "";
-	} else {
-		result = reverseNumber(str.substr(1)) + str.charAt(0);
-	}
+// function reverseNumber(num) {
+// 	var str = num.toString();
+// 	var result;
+// 	if (str === "") {
+// 		return "";
+// 	} else {
+// 		result = reverseNumber(str.substr(1)) + str.charAt(0);
+// 	}
 
-	return Number(result);
+// 	return Number(result);
     
+// }
+
+// console.log(reverseNumber(1508));
+
+// function reverse(num) {
+//    return '\u202E' + num;
+// }
+
+// console.log(reverse(4512));
+
+// function reverseNum(num) {
+// 	// var revNumber = 0;
+// 	// while (number > 0) {
+// 	// 	revNumber = (revNumber * 10) + (number % 10);
+// 	// 	number = Math.floor(number / 10);
+// 	// }
+
+// 	// return revNumber;
+// 	var rev_num = 0;
+// 	var base_pos = 1;
+
+// 	if (num > 0) {
+// 		reverseNum(Math.floor(num / 10)); 
+// 		rev_num += (num % 10) * base_pos;
+// 		base_pos *= 10;
+// 	}
+    	
+//     	return rev_num;
+// }
+// console.log(reverseNum(876));
+
+
+function showNestingStr(str) {
+	let left = [];
+	let right = [];	
+
+	if (str.length % 2 !== 0) {
+		return false;
+	}
+	for (let i = 0; i < str.length/2; i++) {
+		left[i] = "{";
+		right[i] = "}";
+	}
+	
+	return (str === [...left, ...right].join("")) ? true : false;
 }
 
-console.log(reverseNumber(1508));
-
-function reverse(num) {
-   return '\u202E' + num;
-}
-
-console.log(reverse(4512));
+console.log(showNestingStr("{{}}}}}}}}"));
+console.log(showNestingStr('{}')); 
+console.log(showNestingStr('{{}}'));
+console.log(showNestingStr('{{}}}'));
+console.log(showNestingStr('{{{{}}'));
