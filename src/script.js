@@ -531,47 +531,51 @@
 
 // console.log(reverse(4512));
 
-// function reverseNum(num) {
-// 	// var revNumber = 0;
-// 	// while (number > 0) {
-// 	// 	revNumber = (revNumber * 10) + (number % 10);
-// 	// 	number = Math.floor(number / 10);
-// 	// }
+var rev_num = 0;
+var base_pos = 1;
 
-// 	// return revNumber;
-// 	var rev_num = 0;
-// 	var base_pos = 1;
+function reverseNum(num) {
 
-// 	if (num > 0) {
-// 		reverseNum(Math.floor(num / 10)); 
-// 		rev_num += (num % 10) * base_pos;
-// 		base_pos *= 10;
-// 	}
-    	
-//     	return rev_num;
-// }
-// console.log(reverseNum(876));
+	if (num > 0) {
+		reverseNum(Math.floor(num / 10));
+		rev_num += (num % 10) * base_pos;
+		base_pos *= 10;
+	}
 
+    return rev_num;
+}
+
+console.log(reverseNum(876));
 
 //============NestingStr Function==============
 function showNestingStr(str) {
-	let counter = 0;
 
-	for (let i = 0; i < str.length; i++) {  
+	if (str.length <= 1) {
+		return false;
+	}
 
-		if (str[i] === "{") {
-		    counter++;
-		} else if (str[i] === "}") {
-		    counter--;
-		}  
-		
-		if (counter < 0) {
-			return false;
+	let openingBrackets = ["[", "{", "("];
+  	let closingBrackets = ["]", "}", ")"];
+
+  	let symbol;
+  	let openSymbol;
+    let stack = [];
+
+	for (let i = 0; i < str.length; i++) {
+		symbol = str[i];
+
+		if (closingBrackets.indexOf(symbol) > -1) {
+			openSymbol = openingBrackets[closingBrackets.indexOf(symbol)];
+			if (stack.length === 0 || (stack.pop() !== openSymbol)) {
+				return false;
+			}
+		} else {
+			stack.push(symbol);
 		}
 	}
 
-	return (counter > 0) ? false : true;
-}
+ 	return stack.length === 0;
+};
 
 console.log(showNestingStr("{{}}}}}}}}"));
 console.log(showNestingStr('{}')); 
@@ -579,3 +583,17 @@ console.log(showNestingStr('{{}}'));
 console.log(showNestingStr('{{}}}'));
 console.log(showNestingStr('{}{}{}{{}}'));
 console.log(showNestingStr('}{{}'));
+
+console.log(showNestingStr("(()))))))))"));
+console.log(showNestingStr('())')); 
+console.log(showNestingStr('(())))'));
+console.log(showNestingStr('(()))))'));
+console.log(showNestingStr('()()()(())))'));
+console.log(showNestingStr(')(()))'));
+
+console.log(showNestingStr("[[]]]]]]]]"));
+console.log(showNestingStr('[]')); 
+console.log(showNestingStr('[[]]'));
+console.log(showNestingStr('[[]]]'));
+console.log(showNestingStr('[][][][][]]'));
+console.log(showNestingStr('][[]'));
