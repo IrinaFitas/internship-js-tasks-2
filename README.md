@@ -1,1 +1,1 @@
-# andersen-internship-js-tasks-2
+# internship-js-tasks-2
